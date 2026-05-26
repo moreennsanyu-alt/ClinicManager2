@@ -1,4 +1,4 @@
-name: Clinic WPF Build & Test
+name: Build & Test
 
 on:
   push:
@@ -28,20 +28,7 @@ jobs:
           .nuke/temp
           ~/.nuget/packages
         key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-         
-    - name: Extract Split Archive
-      shell: pwsh
-      env:
-        ZIP_PWD: ${{ secrets.DxPass }}
-      run: |
-          $packageName = "dx.zip.001"
-          $outputDir = "support/nupkg"
-
-          if (!(Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir }
-
-          # Access the environment variable using $env:
-          & 7z x "$packageName" -p"$env:ZIP_PWD" "-o$outputDir" -y
-   
+    
     - name: Minimize windows
       shell: powershell
       run: (New-Object -ComObject Shell.Application).MinimizeAll()
