@@ -1,0 +1,71 @@
+name: Clinic WPF Build & Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build and UI Test
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: |
+          10.0.200
+      
+    - name: 'Cache: .nuke/temp, ~/.nuget/packages'
+      uses: actions/cache@v4
+      with:
+        path: |
+          .nuke/temp
+          ~/.nuget/packages
+        key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
+         
+    - name: Extract Split Archive
+      shell: pwsh
+      env:
+        ZIP_PWD: ${{ secrets.DxPass }}
+      run: |
+          $packageName = "dx.zip.001"
+          $outputDir = "support/nupkg"
+
+          if (!(Test-Path $outputDir)) { New-Item -ItemType Directory -Path $outputDir }
+
+          # Access the environment variable using $env:
+          & 7z x "$packageName" -p"$env:ZIP_PWD" "-o$outputDir" -y
+   
+    - name: Minimize windows
+      shell: powershell
+      run: (New-Object -ComObject Shell.Application).MinimizeAll()
+
+     
+    - name: Run NUKE
+      run: ./build.ps1
+
+    - name: Create Test Report
+      uses: icsharpcode/test-summary-action@dist
+      if: always()
+      with:
+        paths: "artifacts/**/*.trx"
+     
+
+    # 6. Upload Artifacts
+    # Uses 'if: always()' so logs are uploaded even if the build/test fails
+    - name: Upload Build and Test Logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-and-test-logs
+        path: |
+          Artifacts/Attachments/
+          Artifacts/bin/**/*.png
+          Artifacts/bin/**/*.avi
+        retention-days: 5
