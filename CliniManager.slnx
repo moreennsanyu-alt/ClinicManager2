@@ -11,18 +11,21 @@
     <Project Path="src/desktop/ClinicManager.Core/ClinicManager.Core.csproj" />
     <Project Path="src/desktop/ClinicManager.Win/ClinicManager.Win.csproj" />
   </Folder>  
+  
   <Folder Name="/DesktopTests/">
     <Project Path="src/desktop.tests/ClinicManager.Core.Tests/ClinicManager.Core.Tests.csproj" />
     <Project Path="src/desktop.tests/ClinicManager.Win.Tests/ClinicManager.Win.Tests.csproj" />
     <Project Path="src/desktop.tests/ClinicManager.E2E.Tests/ClinicManager.E2E.Tests.csproj" />
     <Project Path="src/desktop.tests/ClinicManager.Testing/ClinicManager.Testing.csproj" />
   </Folder>
+  
   <Folder Name="/Server/">
     <Project Path="src/server/Application/Application.csproj" />
     <Project Path="src/server/Domain/Domain.csproj" />
     <Project Path="src/server/Infrastructure/Infrastructure.csproj" />
     <Project Path="src/server/Web/Web.csproj" DefaultStartup="true" />
   </Folder>
+  
   <Folder Name="/ServerTests/">
     <Project Path="src/server.tests/Application.FunctionalTests/Application.FunctionalTests.csproj" />
     <Project Path="src/server.tests/Application.UnitTests/Application.UnitTests.csproj" />
