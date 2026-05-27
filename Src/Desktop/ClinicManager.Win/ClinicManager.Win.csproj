@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <AssemblyName>ClinicMgr</AssemblyName>
+    <TargetFramework>net10.0-windows</TargetFramework>
   </PropertyGroup>
-
- 
 
 </Project>
