@@ -23,7 +23,7 @@ using Serilog;
 
 [UnsetVisualStudioEnvironmentVariables]
 [DotNetVerbosityMapping]
-class Build : NukeBuild, ICompile
+class Build : NukeBuild
 {
     /* Support plugins are available for:
        - JetBrains ReSharper        https://nuke.build/resharper
