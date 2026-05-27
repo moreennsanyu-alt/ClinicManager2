@@ -118,7 +118,7 @@ class Build : NukeBuild, ICompile
     
 
     Target UnitTests => _ => _
-        .DependsOn(Compile)
+        .DependsOn(ICompile)
         .Executes(() =>
         {
             var testProjectNames = new[] { "ClinicManager.Win.Tests", "ClinicManager.Core.Tests" };
@@ -156,7 +156,7 @@ class Build : NukeBuild, ICompile
         });
 
     Target E2ETests => _ => _
-        .DependsOn(Compile)
+        .DependsOn(ICompile)
         .Executes(() =>
         {
             var testProjectNames = new[] { "ClinicManager.E2E.Tests" };
@@ -214,7 +214,7 @@ class Build : NukeBuild, ICompile
         });
 
 		Target Full => _ => _
-        .DependsOn(Compile)
+        .DependsOn(ICompile)
 		.DependsOn(Installers)
 	    .DependsOn(Tests)
         .Executes(() =>
