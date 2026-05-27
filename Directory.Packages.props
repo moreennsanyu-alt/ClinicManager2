@@ -5,6 +5,7 @@
     <AspnetVersion>9.0.16</AspnetVersion>
     <EfcoreVersion>9.0.16</EfcoreVersion>
     <MicrosoftExtensionsVersion>9.0.16</MicrosoftExtensionsVersion>
+    <FlaUIVersion>5.0.0</FlaUIVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Ardalis.GuardClauses" Version="5.0.0" />
@@ -42,5 +43,13 @@
     <PackageVersion Include="System.Configuration.ConfigurationManager" Version="9.0.16" />
     <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.16.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EfcoreVersion)" />
+      
+    <PackageVersion Include="FlaUI.TestUtilities" Version="$(FlaUIVersion)" />
+    <PackageVersion Include="FlaUI.Core.Signed" Version="$(FlaUIVersion)" />
+    <PackageVersion Include="FlaUI.UIA3.Signed" Version="$(FlaUIVersion)" />
+    
+    <PackageVersion Include="Microsoft.Testing.Extensions.CodeCoverage" Version="18.7.0" />
+
+  
   </ItemGroup>
 </Project>
