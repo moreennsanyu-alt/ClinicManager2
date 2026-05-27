@@ -22,7 +22,7 @@ using Serilog;
 
 [UnsetVisualStudioEnvironmentVariables]
 [DotNetVerbosityMapping]
-class Build : NukeBuild
+class Build : NukeBuild, ICompile
 {
     /* Support plugins are available for:
        - JetBrains ReSharper        https://nuke.build/resharper
@@ -31,7 +31,7 @@ class Build : NukeBuild
        - Microsoft VSCode           https://nuke.build/vscode
     */
 
-    public static int Main() => Execute<Build>(x => x.Tests);
+    public static int Main() => Execute<Build>(x => ((ICompile) x).Compile);
 
     [Parameter("The solution configuration to build. Default is 'Debug' (local) or 'CI' (server).")]
     readonly Configuration Configuration = Configuration.Debug;
@@ -40,8 +40,6 @@ class Build : NukeBuild
         "to generate a .binlog file which holds some useful information.")]
     readonly bool? GenerateBinLog;
 
-    [Solution(GenerateProjects = true)]
-    readonly Solution Solution = null!;
 
 
     [Required]
@@ -91,34 +89,6 @@ class Build : NukeBuild
                 .SetConfigFile(RootDirectory / "nuget.config")
                 );
         });
-
-    Target Compile => _ => _
-        .DependsOn(Restore)
-        .Executes(() =>
-        {
-            ReportSummary(s => s
-                .WhenNotNull(SemVer, (summary, semVer) => summary
-                    .AddPair("Version", semVer)));
-
-            DotNetBuild(s => s
-                .SetProjectFile(Solution)
-                .SetConfiguration(Configuration)
-                .When(_ => GenerateBinLog == true, c => c
-                    .SetBinaryLog(BuildLogsDirectory / $"ClinicManager.build.binlog")
-                )
-                .EnableNoLogo());
-        });
-
-    
-
-    Project[] UnitTestProjects  => new[]{
-         Solution.DesktopTests.ClinicManager_Win_Tests,
-		 Solution.DesktopTests.ClinicManager_Core_Tests,
-    };
-
-	Project[] E2ETestProjects  => new[]{
-         Solution.DesktopTests.ClinicManager_E2E_Tests,
-    };
    
     Target Tests => _ => _
         .DependsOn(UnitTests)
@@ -151,11 +121,14 @@ class Build : NukeBuild
         .DependsOn(Compile)
         .Executes(() =>
         {
-            
-            UnitTestProjects.ForEach(x=>Information(x.Name));
+            var testProjectNames = new[] { "ClinicManager.Win.Tests", "ClinicManager.Core.Tests" };
+            var solution = ((IHazSolution) this).Solution;
+            var configuration = ((ICompile) this).Configuration;
+          
+            var unitTestProjects = testProjectNames.Select(x => solution.GetAllProjects(x).First());
            
 		var testCombinations =
-                from project in UnitTestProjects
+                from project in unitTestProjects
                 let frameworks = project.GetTargetFrameworks()
                 from framework in frameworks
                 select new { project, framework };
@@ -186,13 +159,19 @@ class Build : NukeBuild
         .DependsOn(Compile)
         .Executes(() =>
         {
+            var testProjectNames = new[] { "ClinicManager.E2E.Tests" };
+            var solution = ((IHazSolution) this).Solution;
+            var configuration = ((ICompile) this).Configuration;
+          
+            var unitTestProjects = testProjectNames.Select(x => solution.GetAllProjects(x).First());
+         
             var testCombinations =
-                from project in E2ETestProjects
+                from project in unitTestProjects
                 let frameworks = project.GetTargetFrameworks()
                 from framework in frameworks
                 select new { project, framework };
 
-                E2ETestProjects.ForEach(x=>Information(x.Name));
+               // E2ETestProjects.ForEach(x=>Information(x.Name));
 
             DotNetRun(s => s
                 .SetConfiguration(Configuration.Debug)
@@ -219,10 +198,15 @@ class Build : NukeBuild
         .DependsOn(Restore)
         .Executes(() =>
         {
-            
+            var setupProjectName = "ClinicManager.Setup";
+            var solution = ((IHazSolution) this).Solution;
+            var configuration = ((ICompile) this).Configuration;
+          
+            var setupProject = solution.GetAllProjects(setupProjectName).First();
+         
             DotNetBuild(s => s
-                .SetProjectFile(Solution.Setup.ClinicManager_Setup)
-                .SetConfiguration(Configuration)
+                .SetProjectFile(setupProject);
+                .SetConfiguration(configuration)
                 .When(_ => GenerateBinLog == true, c => c
                     .SetBinaryLog(BuildLogsDirectory / $"ClinicManagerSetup.build.binlog")
                 )

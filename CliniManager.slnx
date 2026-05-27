@@ -19,17 +19,5 @@
     <Project Path="src/desktop.tests/ClinicManager.Testing/ClinicManager.Testing.csproj" />
   </Folder>
   
-  <Folder Name="/Server/">
-    <Project Path="src/server/Application/Application.csproj" />
-    <Project Path="src/server/Domain/Domain.csproj" />
-    <Project Path="src/server/Infrastructure/Infrastructure.csproj" />
-    <Project Path="src/server/Web/Web.csproj" DefaultStartup="true" />
-  </Folder>
-  
-  <Folder Name="/ServerTests/">
-    <Project Path="src/server.tests/Application.FunctionalTests/Application.FunctionalTests.csproj" />
-    <Project Path="src/server.tests/Application.UnitTests/Application.UnitTests.csproj" />
-    <Project Path="src/server.tests/Domain.UnitTests/Domain.UnitTests.csproj" />
-    <Project Path="src/server.tests/Infrastructure.IntegrationTests/Infrastructure.IntegrationTests.csproj" />
-  </Folder>
+
 </Solution>
