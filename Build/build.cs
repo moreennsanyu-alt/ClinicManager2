@@ -13,6 +13,7 @@ using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Tools.Xunit;
 using Nuke.Common.Utilities;
 using Nuke.Common.Utilities.Collections;
+using Nuke.Common.CI;
 using Nuke.Components;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using static Nuke.Common.Tools.ReportGenerator.ReportGeneratorTasks;
@@ -31,7 +32,7 @@ class Build : NukeBuild, ICompile
        - Microsoft VSCode           https://nuke.build/vscode
     */
 
-    public static int Main() => Execute<Build>(x => ((ICompile) x).Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
     [Parameter("The solution configuration to build. Default is 'Debug' (local) or 'CI' (server).")]
     readonly Configuration Configuration = Configuration.Debug;
@@ -39,7 +40,10 @@ class Build : NukeBuild, ICompile
     [Parameter("Use this parameter if you encounter build problems in any way, " +
         "to generate a .binlog file which holds some useful information.")]
     readonly bool? GenerateBinLog;
-
+ 
+    [Solution(GenerateProjects = false)]
+    readonly Solution Solution = null!;
+    
 
 
     [Required]
@@ -90,6 +94,24 @@ class Build : NukeBuild, ICompile
                 );
         });
    
+    Target Compile => _ => _
+        .DependsOn(Restore)
+        .Executes(() =>
+        {
+            ReportSummary(s => s
+                .WhenNotNull(SemVer, (summary, semVer) => summary
+                    .AddPair("Version", semVer)));
+
+            DotNetBuild(s => s
+                .SetProjectFile(Solution)
+                .SetConfiguration(Configuration)
+                .When(_ => GenerateBinLog == true, c => c
+                    .SetBinaryLog(BuildLogsDirectory / $"ClinicManager.build.binlog")
+                )
+                .EnableNoLogo());
+        });
+        
+        
     Target Tests => _ => _
         .DependsOn(UnitTests)
         .DependsOn(E2ETests);
@@ -118,14 +140,12 @@ class Build : NukeBuild, ICompile
     
 
     Target UnitTests => _ => _
-        .DependsOn(ICompile)
+        .DependsOn(Compile)
         .Executes(() =>
         {
             var testProjectNames = new[] { "ClinicManager.Win.Tests", "ClinicManager.Core.Tests" };
-            var solution = ((IHazSolution) this).Solution;
-            var configuration = ((ICompile) this).Configuration;
-          
-            var unitTestProjects = testProjectNames.Select(x => solution.GetAllProjects(x).First());
+            
+            var unitTestProjects = testProjectNames.Select(x => Solution.GetAllProjects(x).First());
            
 		var testCombinations =
                 from project in unitTestProjects
@@ -156,14 +176,12 @@ class Build : NukeBuild, ICompile
         });
 
     Target E2ETests => _ => _
-        .DependsOn(ICompile)
+        .DependsOn(Compile)
         .Executes(() =>
         {
             var testProjectNames = new[] { "ClinicManager.E2E.Tests" };
-            var solution = ((IHazSolution) this).Solution;
-            var configuration = ((ICompile) this).Configuration;
-          
-            var unitTestProjects = testProjectNames.Select(x => solution.GetAllProjects(x).First());
+
+            var unitTestProjects = testProjectNames.Select(x => Solution.GetAllProjects(x).First());
          
             var testCombinations =
                 from project in unitTestProjects
@@ -199,14 +217,12 @@ class Build : NukeBuild, ICompile
         .Executes(() =>
         {
             var setupProjectName = "ClinicManager.Setup";
-            var solution = ((IHazSolution) this).Solution;
-            var configuration = ((ICompile) this).Configuration;
-          
-            var setupProject = solution.GetAllProjects(setupProjectName).First();
+            
+            var setupProject = Solution.GetAllProjects(setupProjectName).First();
          
             DotNetBuild(s => s
                 .SetProjectFile(setupProject)
-                .SetConfiguration(configuration)
+                .SetConfiguration(Configuration)
                 .When(_ => GenerateBinLog == true, c => c
                     .SetBinaryLog(BuildLogsDirectory / $"ClinicManagerSetup.build.binlog")
                 )
@@ -214,7 +230,7 @@ class Build : NukeBuild, ICompile
         });
 
 		Target Full => _ => _
-        .DependsOn(ICompile)
+        .DependsOn(Compile)
 		.DependsOn(Installers)
 	    .DependsOn(Tests)
         .Executes(() =>
