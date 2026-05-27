@@ -220,13 +220,7 @@ class Build : NukeBuild, ICompile
         .Executes(() =>
         {
             
-            DotNetBuild(s => s
-                .SetProjectFile(Solution.Setup.ClinicManager_Setup)
-                .SetConfiguration(Configuration)
-                .When(_ => GenerateBinLog == true, c => c
-                    .SetBinaryLog(BuildLogsDirectory / $"ClinicManagerSetup.build.binlog")
-                )
-                .EnableNoLogo());
+            
         });
 		
     static bool IsDocumentation(string x) =>
