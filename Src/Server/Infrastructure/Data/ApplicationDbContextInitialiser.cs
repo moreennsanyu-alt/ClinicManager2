@@ -1,12 +1,13 @@
-using ClinicManager.Domain.Constants;
-using ClinicManager.Domain.Entities;
-using ClinicManager.Infrastructure.Identity;
+锘縰sing CleanArchitecture.Domain.Constants;
+using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Domain.ValueObjects;
+using CleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ClinicManager.Infrastructure.Data;
+namespace CleanArchitecture.Infrastructure.Data;
 
 public static class InitialiserExtensions
 {
@@ -92,11 +93,12 @@ public class ApplicationDbContextInitialiser
         {
             _context.TodoLists.Add(new TodoList
             {
-                Title = "Todo List",
+                Title = "Tasks",
+                Colour = Colour.Green,
                 Items =
                 {
                     new TodoItem { Title = "Make a todo list 馃搩" },
-                    new TodoItem { Title = "Check off the first item 鉁�" },
+                    new TodoItem { Title = "Check off the first item 鉁�" },
                     new TodoItem { Title = "Realise you've already done two things on the list! 馃く"},
                     new TodoItem { Title = "Reward yourself with a nice, long nap 馃弳" },
                 }

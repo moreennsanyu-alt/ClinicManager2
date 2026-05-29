@@ -1,4 +1,4 @@
-namespace ClinicManager.Application.Common.Interfaces;
+﻿namespace CleanArchitecture.Application.Common.Interfaces;
 
 public interface IUser
 {

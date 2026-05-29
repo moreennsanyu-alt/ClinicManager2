@@ -1,12 +1,12 @@
-using ClinicManager.Domain.Entities;
+﻿using CleanArchitecture.Domain.Entities;
 
-namespace ClinicManager.Application.TodoLists.Queries.GetTodos;
+namespace CleanArchitecture.Application.TodoLists.Queries.GetTodos;
 
 public class TodoListDto
 {
     public TodoListDto()
     {
-        Items = Array.Empty<TodoItemDto>();
+        Items = [];
     }
 
     public int Id { get; init; }

@@ -1,7 +1,7 @@
-using ClinicManager.Domain.Events;
+﻿using CleanArchitecture.Domain.Events;
 using Microsoft.Extensions.Logging;
 
-namespace ClinicManager.Application.TodoItems.EventHandlers;
+namespace CleanArchitecture.Application.TodoItems.EventHandlers;
 
 public class LogTodoItemCompleted : INotificationHandler<TodoItemCompletedEvent>
 {

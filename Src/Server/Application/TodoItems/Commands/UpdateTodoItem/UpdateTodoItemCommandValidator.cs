@@ -1,4 +1,4 @@
-namespace ClinicManager.Application.TodoItems.Commands.UpdateTodoItem;
+﻿namespace CleanArchitecture.Application.TodoItems.Commands.UpdateTodoItem;
 
 public class UpdateTodoItemCommandValidator : AbstractValidator<UpdateTodoItemCommand>
 {

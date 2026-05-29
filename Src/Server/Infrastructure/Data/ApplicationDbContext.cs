@@ -1,11 +1,11 @@
-using System.Reflection;
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Domain.Entities;
-using ClinicManager.Infrastructure.Identity;
+﻿using System.Reflection;
+using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ClinicManager.Infrastructure.Data;
+namespace CleanArchitecture.Infrastructure.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {

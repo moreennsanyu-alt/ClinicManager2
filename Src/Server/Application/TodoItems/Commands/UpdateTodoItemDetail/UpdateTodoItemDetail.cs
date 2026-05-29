@@ -1,7 +1,7 @@
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Domain.Enums;
+﻿using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Domain.Enums;
 
-namespace ClinicManager.Application.TodoItems.Commands.UpdateTodoItemDetail;
+namespace CleanArchitecture.Application.TodoItems.Commands.UpdateTodoItemDetail;
 
 public record UpdateTodoItemDetailCommand : IRequest
 {
@@ -26,7 +26,7 @@ public class UpdateTodoItemDetailCommandHandler : IRequestHandler<UpdateTodoItem
     public async Task Handle(UpdateTodoItemDetailCommand request, CancellationToken cancellationToken)
     {
         var entity = await _context.TodoItems
-            .FindAsync(new object[] { request.Id }, cancellationToken);
+            .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 

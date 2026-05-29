@@ -1,10 +1,10 @@
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Domain.Common;
+﻿using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace ClinicManager.Infrastructure.Data.Interceptors;
+namespace CleanArchitecture.Infrastructure.Data.Interceptors;
 
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {

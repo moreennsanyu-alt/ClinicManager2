@@ -1,6 +1,6 @@
-using ClinicManager.Application.Common.Models;
+﻿using CleanArchitecture.Application.Common.Models;
 
-namespace ClinicManager.Application.Common.Interfaces;
+namespace CleanArchitecture.Application.Common.Interfaces;
 
 public interface IIdentityService
 {

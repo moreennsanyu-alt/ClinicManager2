@@ -1,6 +1,6 @@
-using MediatR;
+﻿using MediatR;
 
-namespace ClinicManager.Domain.Common;
+namespace CleanArchitecture.Domain.Common;
 
 public abstract class BaseEvent : INotification
 {

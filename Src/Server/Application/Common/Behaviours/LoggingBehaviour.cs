@@ -1,8 +1,8 @@
-using ClinicManager.Application.Common.Interfaces;
+﻿using CleanArchitecture.Application.Common.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace ClinicManager.Application.Common.Behaviours;
+namespace CleanArchitecture.Application.Common.Behaviours;
 
 public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
     where TRequest : notnull

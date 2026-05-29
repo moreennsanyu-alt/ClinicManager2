@@ -1,11 +1,11 @@
-using ClinicManager.Application.Common.Behaviours;
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Application.TodoItems.Commands.CreateTodoItem;
+﻿using CleanArchitecture.Application.Common.Behaviours;
+using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
-namespace ClinicManager.Application.UnitTests.Common.Behaviours;
+namespace CleanArchitecture.Application.UnitTests.Common.Behaviours;
 
 public class RequestLoggerTests
 {

@@ -1,9 +1,10 @@
-using ClinicManager.Infrastructure.Data;
+using CleanArchitecture.Infrastructure.Data;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.AddServiceDefaults();
 
 builder.AddKeyVaultIfConfigured();
 builder.AddApplicationServices();
@@ -23,21 +24,28 @@ else
     app.UseHsts();
 }
 
-
-app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseCors(static builder => 
+    builder.AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowAnyOrigin());
+
+app.UseFileServer();
 
 app.MapOpenApi();
 app.MapScalarApiReference();
 
-
 app.UseExceptionHandler(options => { });
 
+#if (UseApiOnly)
 app.Map("/", () => Results.Redirect("/scalar"));
+#endif
 
-app.MapEndpoints();
+app.MapDefaultEndpoints();
+app.MapEndpoints(typeof(Program).Assembly);
+
+#if (!UseApiOnly)
+app.MapFallbackToFile("index.html");
+#endif
 
 app.Run();
-
-public partial class Program { }

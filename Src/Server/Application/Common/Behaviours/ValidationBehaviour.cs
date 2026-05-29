@@ -1,6 +1,6 @@
-using ValidationException = ClinicManager.Application.Common.Exceptions.ValidationException;
+﻿using ValidationException = CleanArchitecture.Application.Common.Exceptions.ValidationException;
 
-namespace ClinicManager.Application.Common.Behaviours;
+namespace CleanArchitecture.Application.Common.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull

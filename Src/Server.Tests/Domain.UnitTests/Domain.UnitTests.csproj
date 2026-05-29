@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>ClinicManager.Domain.UnitTests</RootNamespace>
-        <AssemblyName>ClinicManager.Domain.UnitTests</AssemblyName>
+        <RootNamespace>CleanArchitecture.Domain.UnitTests</RootNamespace>
+        <AssemblyName>CleanArchitecture.Domain.UnitTests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Server\Domain\Domain.csproj" />
+        <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>

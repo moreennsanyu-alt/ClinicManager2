@@ -8,15 +8,31 @@
     <File Path="README.md" />
   </Folder>
   <Folder Name="/Desktop/">
-    <Project Path="src/desktop/ClinicManager.Core/ClinicManager.Core.csproj" />
-    <Project Path="src/desktop/ClinicManager.Win/ClinicManager.Win.csproj" />
-  </Folder>  
+    <Project Path="Src/Desktop/ClinicManager.Core/ClinicManager.Core.csproj" />
+    <Project Path="Src/Desktop/ClinicManager.Win/ClinicManager.Win.csproj" />
+  </Folder> 
+  
+  <Folder Name="/Server/">
+    <Project Path="Src/Server/Application/Application.csproj" />
+    <Project Path="Src/Server/Domain/Domain.csproj" />
+    <Project Path="Src/Server/Infrastructure/Infrastructure.csproj" />
+    <Project Path="Src/Server/Web/Web.csproj" />
+    <Project Path="Src/Server/ServiceDefaults/ServiceDefaults.csproj" />
+    <Project Path="Src/Server/Shared/Shared.csproj" />
+  </Folder> 
+  
+  <Folder Name="/ServerTests/">
+    <Project Path="Src/Server.Tests/Application.FunctionalTests/Application.FunctionalTests.csproj" />
+    <Project Path="Src/Server.Tests/Application.UnitTests/Application.UnitTests.csproj" />
+    <Project Path="Src/Server.Tests/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj" />
+    <Project Path="Src/Server.Tests/Domain.UnitTests/Domain.UnitTests.csproj" />
+  </Folder> 
   
   <Folder Name="/DesktopTests/">
-    <Project Path="src/desktop.tests/ClinicManager.Core.Tests/ClinicManager.Core.Tests.csproj" />
-    <Project Path="src/desktop.tests/ClinicManager.Win.Tests/ClinicManager.Win.Tests.csproj" />
-    <Project Path="src/desktop.tests/ClinicManager.E2E.Tests/ClinicManager.E2E.Tests.csproj" />
-    <Project Path="src/desktop.tests/ClinicManager.Testing/ClinicManager.Testing.csproj" />
+    <Project Path="Src/Desktop.tests/ClinicManager.Core.Tests/ClinicManager.Core.Tests.csproj" />
+    <Project Path="Src/Desktop.tests/ClinicManager.Win.Tests/ClinicManager.Win.Tests.csproj" />
+    <Project Path="Src/Desktop.tests/ClinicManager.E2E.Tests/ClinicManager.E2E.Tests.csproj" />
+    <Project Path="Src/Desktop.tests/ClinicManager.Testing/ClinicManager.Testing.csproj" />
   </Folder>
   
 

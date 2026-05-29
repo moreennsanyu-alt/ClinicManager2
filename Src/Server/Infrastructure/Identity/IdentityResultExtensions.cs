@@ -1,7 +1,7 @@
-using ClinicManager.Application.Common.Models;
+﻿using CleanArchitecture.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace ClinicManager.Infrastructure.Identity;
+namespace CleanArchitecture.Infrastructure.Identity;
 
 public static class IdentityResultExtensions
 {

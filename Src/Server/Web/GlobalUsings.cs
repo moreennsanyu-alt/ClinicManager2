@@ -1,3 +1,3 @@
 global using Ardalis.GuardClauses;
-global using ClinicManager.Web.Infrastructure;
+global using CleanArchitecture.Web.Infrastructure;
 global using MediatR;

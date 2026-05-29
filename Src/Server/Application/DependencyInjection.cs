@@ -1,5 +1,5 @@
-using System.Reflection;
-using ClinicManager.Application.Common.Behaviours;
+﻿using System.Reflection;
+using CleanArchitecture.Application.Common.Behaviours;
 using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.Extensions.DependencyInjection;

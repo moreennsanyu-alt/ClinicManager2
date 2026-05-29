@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>ClinicManager.Infrastructure.IntegrationTests</RootNamespace>
-        <AssemblyName>ClinicManager.Infrastructure.IntegrationTests</AssemblyName>
+        <RootNamespace>CleanArchitecture.Infrastructure.IntegrationTests</RootNamespace>
+        <AssemblyName>CleanArchitecture.Infrastructure.IntegrationTests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,31 +1,29 @@
-using ClinicManager.Application.TodoLists.Commands.CreateTodoList;
-using ClinicManager.Application.TodoLists.Commands.DeleteTodoList;
-using ClinicManager.Domain.Entities;
+﻿using CleanArchitecture.Application.TodoLists.Commands.CreateTodoList;
+using CleanArchitecture.Application.TodoLists.Commands.DeleteTodoList;
+using CleanArchitecture.Domain.Entities;
 
-namespace ClinicManager.Application.FunctionalTests.TodoLists.Commands;
+namespace CleanArchitecture.Application.FunctionalTests.TodoLists.Commands;
 
-using static Testing;
-
-public class DeleteTodoListTests : BaseTestFixture
+public class DeleteTodoListTests : TestBase
 {
     [Test]
     public async Task ShouldRequireValidTodoListId()
     {
         var command = new DeleteTodoListCommand(99);
-        await Should.ThrowAsync<NotFoundException>(() => SendAsync(command));
+        await Should.ThrowAsync<NotFoundException>(() => TestApp.SendAsync(command));
     }
 
     [Test]
     public async Task ShouldDeleteTodoList()
     {
-        var listId = await SendAsync(new CreateTodoListCommand
+        var listId = await TestApp.SendAsync(new CreateTodoListCommand
         {
             Title = "New List"
         });
 
-        await SendAsync(new DeleteTodoListCommand(listId));
+        await TestApp.SendAsync(new DeleteTodoListCommand(listId));
 
-        var list = await FindAsync<TodoList>(listId);
+        var list = await TestApp.FindAsync<TodoList>(listId);
 
         list.ShouldBeNull();
     }

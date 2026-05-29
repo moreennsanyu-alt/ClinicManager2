@@ -1,24 +1,22 @@
-using ClinicManager.Application.Common.Exceptions;
-using ClinicManager.Application.TodoLists.Commands.CreateTodoList;
-using ClinicManager.Domain.Entities;
+﻿using CleanArchitecture.Application.Common.Exceptions;
+using CleanArchitecture.Application.TodoLists.Commands.CreateTodoList;
+using CleanArchitecture.Domain.Entities;
 
-namespace ClinicManager.Application.FunctionalTests.TodoLists.Commands;
+namespace CleanArchitecture.Application.FunctionalTests.TodoLists.Commands;
 
-using static Testing;
-
-public class CreateTodoListTests : BaseTestFixture
+public class CreateTodoListTests : TestBase
 {
     [Test]
     public async Task ShouldRequireMinimumFields()
     {
         var command = new CreateTodoListCommand();
-        await Should.ThrowAsync<ValidationException>(() => SendAsync(command));
+        await Should.ThrowAsync<ValidationException>(() => TestApp.SendAsync(command));
     }
 
     [Test]
     public async Task ShouldRequireUniqueTitle()
     {
-        await SendAsync(new CreateTodoListCommand
+        await TestApp.SendAsync(new CreateTodoListCommand
         {
             Title = "Shopping"
         });
@@ -28,22 +26,22 @@ public class CreateTodoListTests : BaseTestFixture
             Title = "Shopping"
         };
 
-        await Should.ThrowAsync<ValidationException>(() => SendAsync(command));
+        await Should.ThrowAsync<ValidationException>(() => TestApp.SendAsync(command));
     }
 
     [Test]
     public async Task ShouldCreateTodoList()
     {
-        var userId = await RunAsDefaultUserAsync();
+        var userId = await TestApp.RunAsDefaultUserAsync();
 
         var command = new CreateTodoListCommand
         {
             Title = "Tasks"
         };
 
-        var id = await SendAsync(command);
+        var id = await TestApp.SendAsync(command);
 
-        var list = await FindAsync<TodoList>(id);
+        var list = await TestApp.FindAsync<TodoList>(id);
 
         list.ShouldNotBeNull();
         list!.Title.ShouldBe(command.Title);

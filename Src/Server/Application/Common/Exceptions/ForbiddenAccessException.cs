@@ -1,4 +1,4 @@
-namespace ClinicManager.Application.Common.Exceptions;
+﻿namespace CleanArchitecture.Application.Common.Exceptions;
 
 public class ForbiddenAccessException : Exception
 {

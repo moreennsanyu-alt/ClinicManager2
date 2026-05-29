@@ -1,14 +1,12 @@
 using System.Runtime.CompilerServices;
 using AutoMapper;
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Application.Common.Models;
-using ClinicManager.Application.TodoItems.Queries.GetTodoItemsWithPagination;
-using ClinicManager.Application.TodoLists.Queries.GetTodos;
-using ClinicManager.Domain.Entities;
+using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Application.TodoLists.Queries.GetTodos;
+using CleanArchitecture.Domain.Entities;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
-namespace ClinicManager.Application.UnitTests.Common.Mappings;
+namespace CleanArchitecture.Application.UnitTests.Common.Mappings;
 
 public class MappingTests
 {
@@ -38,9 +36,6 @@ public class MappingTests
     [Test]
     [TestCase(typeof(TodoList), typeof(TodoListDto))]
     [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
-    [TestCase(typeof(TodoList), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);

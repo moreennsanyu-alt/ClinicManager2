@@ -1,6 +1,6 @@
-using ClinicManager.Application.Common.Interfaces;
+﻿using CleanArchitecture.Application.Common.Interfaces;
 
-namespace ClinicManager.Application.TodoLists.Commands.DeleteTodoList;
+namespace CleanArchitecture.Application.TodoLists.Commands.DeleteTodoList;
 
 public record DeleteTodoListCommand(int Id) : IRequest;
 

@@ -1,4 +1,4 @@
-namespace ClinicManager.Application.WeatherForecasts.Queries.GetWeatherForecasts;
+﻿namespace CleanArchitecture.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
 public record GetWeatherForecastsQuery : IRequest<IEnumerable<WeatherForecast>>;
 

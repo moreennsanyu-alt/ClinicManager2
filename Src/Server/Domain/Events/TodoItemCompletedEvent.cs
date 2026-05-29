@@ -1,4 +1,4 @@
-namespace ClinicManager.Domain.Events;
+﻿namespace CleanArchitecture.Domain.Events;
 
 public class TodoItemCompletedEvent : BaseEvent
 {

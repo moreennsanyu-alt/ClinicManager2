@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace ClinicManager.Infrastructure.Identity;
+namespace CleanArchitecture.Infrastructure.Identity;
 
 public class ApplicationUser : IdentityUser
 {

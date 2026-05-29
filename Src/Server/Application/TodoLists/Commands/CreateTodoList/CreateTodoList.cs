@@ -1,11 +1,14 @@
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Domain.Entities;
+﻿using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Domain.ValueObjects;
 
-namespace ClinicManager.Application.TodoLists.Commands.CreateTodoList;
+namespace CleanArchitecture.Application.TodoLists.Commands.CreateTodoList;
 
 public record CreateTodoListCommand : IRequest<int>
 {
     public string? Title { get; init; }
+
+    public string? Colour { get; init; }
 }
 
 public class CreateTodoListCommandHandler : IRequestHandler<CreateTodoListCommand, int>
@@ -19,9 +22,11 @@ public class CreateTodoListCommandHandler : IRequestHandler<CreateTodoListComman
 
     public async Task<int> Handle(CreateTodoListCommand request, CancellationToken cancellationToken)
     {
-        var entity = new TodoList();
-
-        entity.Title = request.Title;
+        var entity = new TodoList
+        {
+            Title = request.Title,
+            Colour = Colour.From(request.Colour ?? Colour.Grey)
+        };
 
         _context.TodoLists.Add(entity);
 

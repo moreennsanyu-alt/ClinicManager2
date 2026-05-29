@@ -1,6 +1,6 @@
-using ClinicManager.Application.Common.Interfaces;
+﻿using CleanArchitecture.Application.Common.Interfaces;
 
-namespace ClinicManager.Application.TodoLists.Commands.UpdateTodoList;
+namespace CleanArchitecture.Application.TodoLists.Commands.UpdateTodoList;
 
 public class UpdateTodoListCommandValidator : AbstractValidator<UpdateTodoListCommand>
 {

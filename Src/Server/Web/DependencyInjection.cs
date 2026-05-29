@@ -1,7 +1,7 @@
 using Azure.Identity;
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Infrastructure.Data;
-using ClinicManager.Web.Services;
+using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Infrastructure.Data;
+using CleanArchitecture.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -15,10 +15,8 @@ public static class DependencyInjection
         builder.Services.AddScoped<IUser, CurrentUser>();
 
         builder.Services.AddHttpContextAccessor();
-        builder.Services.AddHealthChecks()
-            .AddDbContextCheck<ApplicationDbContext>();
 
-        builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+        builder.Services.AddExceptionHandler<ProblemDetailsExceptionHandler>();
 
         // Customise default API behaviour
         builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -30,9 +28,12 @@ public static class DependencyInjection
         {
             options.AddOperationTransformer<ApiExceptionOperationTransformer>();
             options.AddOperationTransformer<IdentityApiOperationTransformer>();
+#if (UseApiOnly)
             options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
-
+#endif
         });
+
+        builder.Services.AddCors();
     }
 
     public static void AddKeyVaultIfConfigured(this IHostApplicationBuilder builder)

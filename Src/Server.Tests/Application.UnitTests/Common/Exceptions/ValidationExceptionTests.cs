@@ -1,9 +1,9 @@
-using ClinicManager.Application.Common.Exceptions;
+﻿using CleanArchitecture.Application.Common.Exceptions;
 using FluentValidation.Results;
 using NUnit.Framework;
 using Shouldly;
 
-namespace ClinicManager.Application.UnitTests.Common.Exceptions;
+namespace CleanArchitecture.Application.UnitTests.Common.Exceptions;
 
 public class ValidationExceptionTests
 {

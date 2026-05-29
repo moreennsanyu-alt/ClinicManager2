@@ -1,8 +1,8 @@
-using System.Diagnostics;
-using ClinicManager.Application.Common.Interfaces;
+﻿using System.Diagnostics;
+using CleanArchitecture.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace ClinicManager.Application.Common.Behaviours;
+namespace CleanArchitecture.Application.Common.Behaviours;
 
 public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull

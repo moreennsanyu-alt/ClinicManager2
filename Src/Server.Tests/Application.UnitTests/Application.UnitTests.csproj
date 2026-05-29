@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>ClinicManager.Application.UnitTests</RootNamespace>
-        <AssemblyName>ClinicManager.Application.UnitTests</AssemblyName>
+        <RootNamespace>CleanArchitecture.Application.UnitTests</RootNamespace>
+        <AssemblyName>CleanArchitecture.Application.UnitTests</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -23,8 +23,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Server\Application\Application.csproj" />
-        <ProjectReference Include="..\..\Server\Infrastructure\Infrastructure.csproj" />
+        <ProjectReference Include="..\..\src\Application\Application.csproj" />
+        <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

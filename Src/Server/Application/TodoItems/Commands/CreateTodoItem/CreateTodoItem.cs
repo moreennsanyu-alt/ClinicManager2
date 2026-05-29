@@ -1,8 +1,7 @@
-using ClinicManager.Application.Common.Interfaces;
-using ClinicManager.Domain.Entities;
-using ClinicManager.Domain.Events;
+﻿using CleanArchitecture.Application.Common.Interfaces;
+using CleanArchitecture.Domain.Entities;
 
-namespace ClinicManager.Application.TodoItems.Commands.CreateTodoItem;
+namespace CleanArchitecture.Application.TodoItems.Commands.CreateTodoItem;
 
 public record CreateTodoItemCommand : IRequest<int>
 {
@@ -28,8 +27,6 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemComman
             Title = request.Title,
             Done = false
         };
-
-        entity.AddDomainEvent(new TodoItemCreatedEvent(entity));
 
         _context.TodoItems.Add(entity);
 

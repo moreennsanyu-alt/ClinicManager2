@@ -1,6 +1,6 @@
-global using ClinicManager.Domain.Common;
-global using ClinicManager.Domain.Entities;
-global using ClinicManager.Domain.Enums;
-global using ClinicManager.Domain.Events;
-global using ClinicManager.Domain.Exceptions;
-global using ClinicManager.Domain.ValueObjects;
+﻿global using CleanArchitecture.Domain.Common;
+global using CleanArchitecture.Domain.Entities;
+global using CleanArchitecture.Domain.Enums;
+global using CleanArchitecture.Domain.Events;
+global using CleanArchitecture.Domain.Exceptions;
+global using CleanArchitecture.Domain.ValueObjects;
